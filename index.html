@@ -3,274 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutamento | Crazzy Beamers</title>
+    <title>Crazzy Beamers | 7n</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #a600ff;
-            --primary-dark: #7a00bd;
-            --bg-overlay: rgba(10, 0, 20, 0.85);
-            --input-bg: rgba(0, 0, 0, 0.6);
-            --border: #3d0066;
+            --primary-glow: #a855f7;
+            --primary-dark: #581c87;
+            --bg-color: #050505;
+            --card-bg: rgba(20, 10, 30, 0.6);
+            --text-color: #ffffff;
+            --success-color: #00ff41;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-image: url('https://r2.erweima.ai/ai_image/9589d892-959c-4860-9bc8-e215f795744a.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            padding: 50px 20px;
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                linear-gradient(to bottom, #000 0%, #11051b 100%);
         }
 
-        .container {
-            background: var(--bg-overlay);
-            backdrop-filter: blur(10px);
-            max-width: 850px;
+        .background-fx {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
-            padding: 40px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .orb {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 30%, var(--primary-dark) 100%);
+            box-shadow: 0 0 80px var(--primary-glow);
+            opacity: 0.6;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 50px var(--primary-dark); transform: translateX(-50%) scale(1); }
+            100% { box-shadow: 0 0 90px var(--primary-glow); transform: translateX(-50%) scale(1.05); }
         }
 
         header {
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        h1 {
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin: 0;
-            color: #fff;
-            text-shadow: 2px 2px 10px var(--primary);
-        }
-
-        .section-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin: 25px 0 15px;
-            letter-spacing: 2px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-weight: bold;
-            border-left: 3px solid var(--primary);
-            padding-left: 10px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .brand span { color: var(--primary-glow); }
+
+        .dev-credit {
+            font-size: 0.75rem;
+            color: #888;
         }
-
-        .form-group { margin-bottom: 20px; }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            color: #ccc;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            color: white;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(166, 0, 255, 0.3);
-        }
-
-        textarea { min-height: 80px; resize: vertical; }
-
-        .btn-submit {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
-            border: none;
-            color: white;
+        .dev-credit span {
+            color: var(--primary-glow);
             font-weight: bold;
             text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 2.5rem;
+            color: transparent;
+            background: linear-gradient(to bottom, #d8b4fe, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+            margin-top: 60px;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .status-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .status-pill {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #00ff41;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #00ff41;
+        }
+
+        .discord-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #4c1d95, #7c3aed);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-family: 'Courier Prime', monospace;
+            border: 1px solid var(--primary-glow);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .discord-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.6);
+        }
+
+        .panel-divider {
+            margin: 40px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d8b4fe;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.2rem;
             letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .panel-divider::before, .panel-divider::after {
+            content: '';
+            height: 1px;
+            width: 50px;
+            background: var(--primary-glow);
+            margin: 0 15px;
+            box-shadow: 0 0 5px var(--primary-glow);
+        }
+
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            text-align: left;
+            transition: all 0.3s ease;
             cursor: pointer;
-            margin-top: 30px;
+            text-decoration: none;
+            color: white;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary-glow);
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .expand-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-out, margin-top 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .expand-options.active {
+            max-height: 2500px;
+            margin-top: 15px;
+        }
+
+        .faq-item {
+            background: rgba(10, 5, 20, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-glow);
+            text-align: left;
+        }
+
+        .faq-item h4 {
+            color: var(--primary-glow);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .faq-item p {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .item-list {
+            background: rgba(168, 85, 247, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: white;
+            text-decoration: none;
+            display: block;
             transition: 0.3s;
         }
 
-        .btn-submit:hover {
-            transform: scale(1.01);
-            box-shadow: 0 0 20px var(--primary);
+        .item-list:hover {
+            background: var(--primary-glow);
+            transform: scale(1.02);
         }
 
-        /* TELA DE SUCESSO */
-        #success-screen {
-            display: none;
-            text-align: center;
-            padding: 60px 20px;
+        .card-icon-box {
+            width: 40px;
+            height: 40px;
+            background: rgba(88, 28, 135, 0.5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
         }
 
-        .notice-box {
-            border: 2px dashed var(--primary);
-            padding: 30px;
-            background: rgba(166, 0, 255, 0.1);
-            margin-top: 20px;
+        .card-icon-box i {
+            color: #d8b4fe;
+            font-size: 1.2rem;
         }
 
-        .notice-text {
-            font-size: 20px;
-            font-weight: bold;
-            color: #fff;
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
         }
 
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+        .card p {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .arrow-icon {
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            color: var(--primary-glow);
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        .card:hover .arrow-icon {
+            opacity: 1;
+            right: 15px;
+        }
+
     </style>
 </head>
-<body>
-
-<div class="container" id="main-container">
-    <div id="form-content">
-        <header>
-            <h1>CRAZZY BEAMERS</h1>
-        </header>
-
-        <form id="staffForm">
-            <div class="section-title">Dados Civis e Identificação</div>
-            <div class="grid">
-                <div class="form-group">
-                    <label>Nome Completo (Vida Real)</label>
-                    <input type="text" id="nome" required>
-                </div>
-                <div class="form-group">
-                    <label>Data de Nascimento</label>
-                    <input type="date" id="nascimento" required>
-                </div>
-                <div class="form-group">
-                    <label>Discord (User#0000)</label>
-                    <input type="text" id="discord" required>
-                </div>
-                <div class="form-group">
-                    <label>Idade Atual</label>
-                    <input type="number" id="idade" required>
-                </div>
-            </div>
-
-            <div class="section-title">Qualificações e Experiência</div>
-            <div class="form-group">
-                <label>Liste os grupos, jogos ou comunidades onde já atuou como Staff:</label>
-                <textarea id="experiencia" placeholder="Ex: Admin no Grupo X, Mod no Jogo Y..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Quais ferramentas de administração você domina? (Admins, Logs, Comandos)</label>
-                <input type="text" id="ferramentas" required>
-            </div>
-
-            <div class="section-title">Comprometimento</div>
-            <div class="grid">
-                <div class="form-group">
-                    <label>Horas Diárias Disponíveis</label>
-                    <input type="text" id="horas" placeholder="Ex: 4 a 6 horas" required>
-                </div>
-                <div class="form-group">
-                    <label>Período de Atividade</label>
-                    <select id="periodo">
-                        <option value="Manhã">Manhã</option>
-                        <option value="Tarde">Tarde</option>
-                        <option value="Noite">Noite</option>
-                        <option value="Madrugada">Madrugada</option>
-                        <option value="Misto">Misto / Variado</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="section-title">Avaliação Psicológica</div>
-            <div class="form-group">
-                <label>Por que deveríamos escolher você e não outro candidato?</label>
-                <textarea id="motivo" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>Se um amigo Staff violar as regras, qual seria sua atitude imediata?</label>
-                <textarea id="etica" required></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit" id="submitBtn">Finalizar Inscrição Profissional</button>
-        </form>
+<body oncontextmenu="return false;"> 
+    <div class="background-fx">
+        <div class="orb"></div>
     </div>
 
-    <div id="success-screen">
-        <div style="font-size: 60px; margin-bottom: 20px;">💜</div>
-        <h2>Candidatura Registrada!</h2>
-        <div class="notice-box">
-            <p class="notice-text">
-                🌟 Aviso Em Dentro De 24 Horas Você Vai Saber Se Você Foi Aprovado Ou Reprovado🌟
-            </p>
+    <header>
+        <div class="brand">
+            <i class="fas fa-skull"></i>
+            <span>CRAZZY BEAMERS</span>
         </div>
-        <p style="margin-top: 30px; color: #888;">Nossa equipe técnica já recebeu seus dados para auditoria.</p>
-    </div>
-</div>
+        <div class="dev-credit">
+            Desenvolvido por <span>7n</span>
+        </div>
+    </header>
 
-<script>
-    document.getElementById('staffForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const formDiv = document.getElementById('form-content');
-        const successDiv = document.getElementById('success-screen');
+    <main class="container">
         
-        const webhook = "https://discord.com/api/webhooks/1464100991199613003/tm8jZwjiEZ7S6oCd8F8XgapS9NUWzQCap7cP56DsHjlJ9tIxkQfKL4iPii_bTqw8XSbP";
+        <h1 class="hero-title">CRAZZY BEAMERS</h1>
 
-        const payload = {
-            username: "Crazzy Beamers Auditor",
-            embeds: [{
-                title: "💎 NOVA CANDIDATURA STAFF DETECTADA",
-                color: 0xa600ff,
-                fields: [
-                    { name: "👤 Nome Real", value: document.getElementById('nome').value, inline: true },
-                    { name: "🎂 Idade", value: document.getElementById('idade').value, inline: true },
-                    { name: "🎮 Discord", value: document.getElementById('discord').value, inline: true },
-                    { name: "📅 Nasc.", value: document.getElementById('nascimento').value, inline: true },
-                    { name: "⏰ Horas", value: document.getElementById('horas').value, inline: true },
-                    { name: "☀️ Período", value: document.getElementById('periodo').value, inline: true },
-                    { name: "🛠️ Ferramentas", value: document.getElementById('ferramentas').value },
-                    { name: "📜 Exp. Anterior", value: document.getElementById('experiencia').value || "Nenhuma" },
-                    { name: "🎯 Motivo", value: document.getElementById('motivo').value },
-                    { name: "⚖️ Resposta Ética", value: document.getElementById('etica').value }
-                ],
-                footer: { text: "Crazzy Beamers Security System" },
-                timestamp: new Date()
-            }]
+        <div style="display: flex; justify-content: center; gap: 150px; margin-top: -10px; margin-bottom: 20px; opacity: 0.5;">
+            <i class="fas fa-skull" style="color: #aaa;"></i>
+            <i class="fas fa-skull" style="color: #aaa;"></i>
+        </div>
+
+        <div class="status-container">
+            <div class="status-pill">
+                <span class="dot"></span> Sistema Ativo
+            </div>
+            <div class="status-pill">
+                <span class="dot"></span> Servidor Online
+            </div>
+        </div>
+
+        <a href="https://discord.gg/U9F5wUygvV" target="_blank" class="discord-btn">
+            <i class="fa-brands fa-discord"></i> Entrar no Discord
+        </a>
+
+        <div class="panel-divider">
+            Painel Principal
+        </div>
+
+        <div class="card-grid">
+            
+            <div class="card" onclick="toggleMenu('generator-list', 'generator-arrow')">
+                <div class="card-icon-box">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Gerador</h3>
+                <p>Ferramentas de geração (Clique para ver)</p>
+                <i class="fas fa-chevron-down arrow-icon" id="generator-arrow"></i>
+                
+                <div class="expand-options" id="generator-list">
+                    <a href="https://abrir.link/BGhUJ" target="_blank" class="item-list">
+                         <i class="fas fa-bolt"></i> Splunk X
+                    </a>
+                    <a href="https://abrir.link/gXsJx" target="_blank" class="item-list">
+                         <i class="fas fa-ghost"></i> Immortal X
+                    </a>
+                    <a href="https://abrir.link/ONbEU" target="_blank" class="item-list">
+                        <i class="fas fa-biohazard"></i> Injures
+                    </a>
+                </div>
+            </div>
+
+            <a href="https://discord.gg/U9F5wUygvV" target="_blank" class="card">
+                <div class="card-icon-box">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Métodos</h3>
+                <p>Métodos avançados no Discord</p>
+                <i class="fas fa-arrow-right arrow-icon"></i>
+            </a>
+
+            <div class="card" onclick="toggleMenu('tutorial-list', 'tutorial-arrow')">
+                <div class="card-icon-box">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Tutorial</h3>
+                <p>Guias completos (Clique para ver)</p>
+                <i class="fas fa-chevron-down arrow-icon" id="tutorial-arrow"></i>
+                
+                <div class="expand-options" id="tutorial-list">
+                    <a href="https://youtube.com/shorts/x-RnBGDiPRA?si=vhwAtJAvCYiM2adn" target="_blank" class="item-list">
+                         <i class="fas fa-link"></i> Método Link Fake
+                    </a>
+                    <a href="https://youtube.com/shorts/C0ql9CegkJ4?si=7EatqWsAFNBMqb-m" target="_blank" class="item-list">
+                         <i class="fas fa-cookie-bite"></i> Método Cookie
+                    </a>
+                </div>
+            </div>
+
+            <div class="card" onclick="toggleMenu('bypass-list', 'bypass-arrow')">
+                <div class="card-icon-box">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3>Bypass</h3>
+                <p>Ferramentas de bypass (Clique para ver)</p>
+                <i class="fas fa-chevron-down arrow-icon" id="bypass-arrow"></i>
+                
+                <div class="expand-options" id="bypass-list">
+                    <a href="https://rbxtools-kit.com/bypass/CrazzyBeamers" target="_blank" class="item-list">
+                         <i class="fas fa-star"></i> Bypass On (Recomendada)
+                    </a>
+                    <a href="https://abrir.link/HbHMO" target="_blank" class="item-list">
+                         <i class="fas fa-shield-halved"></i> Bypass
+                    </a>
+                </div>
+            </div>
+
+            <div class="card" onclick="toggleMenu('faq-list', 'faq-arrow')">
+                <div class="card-icon-box">
+                    <i class="fas fa-question"></i>
+                </div>
+                <h3>FAQ</h3>
+                <p>Perguntas Frequentes - Tire suas dúvidas</p>
+                <i class="fas fa-chevron-down arrow-icon" id="faq-arrow"></i>
+
+                <div class="expand-options" id="faq-list">
+                    
+                    <div class="faq-item">
+                        <h4>01. Por onde eu começo?</h4>
+                        <p>O primeiro passo é assistir ao tutorial dos geradores. Após compreender o funcionamento, você deve avançar para a criação do link e a aplicação dos métodos específicos.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>02. Como eu consigo o cookie?</h4>
+                        <p>O cookie é obtido quando o alvo realiza o login através do seu link e insere o código de verificação de duas etapas (2FA). Assim que validado, o bot envia o cookie automaticamente.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>03. O que é Bypass?</h4>
+                        <p>É uma ferramenta avançada utilizada para forçar a remoção do e-mail verificado da conta, dificultando a recuperação pelo dono original.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>04. O que é Auth (Autosecure)?</h4>
+                        <p>Esta função ativa um autenticador dentro da conta alvo e gera uma Auth Key (chave do autenticador), que é enviada diretamente para você.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>05. O que é Summary?</h4>
+                        <p>O Summary (Resumo) fornece os dados de inventário e o histórico de Robux gastos na conta.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>06. O que fazer depois de pegar os Robux?</h4>
+                        <p>A recomendação do guia é realizar o banimento imediato usando algo que quebre as regras do Roblox da conta do alvo após a retirada dos recursos.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>07. Onde as contas vão cair?</h4>
+                        <p>Assim que os dados são capturados, eles são enviados via Webhook diretamente para o servidor de destino configurado.</p>
+                    </div>
+
+                    <a href="https://discord.gg/U9F5wUygvV" target="_blank" class="discord-btn" style="margin-top: 10px;">
+                        <i class="fa-brands fa-discord"></i> Tira Mais Dúvidas Aqui
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false;
         };
 
-        btn.disabled = true;
-        btn.innerText = "ENVIANDO DADOS...";
-
-        try {
-            await fetch(webhook, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            formDiv.style.display = 'none';
-            successDiv.style.display = 'block';
-        } catch (err) {
-            alert("Erro ao conectar com o banco de dados. Tente novamente.");
-            btn.disabled = false;
-            btn.innerText = "Finalizar Inscrição Profissional";
+        function toggleMenu(listId, arrowId) {
+            const list = document.getElementById(listId);
+            const arrow = document.getElementById(arrowId);
+            list.classList.toggle('active');
+            if(list.classList.contains('active')) {
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
+            }
         }
-    });
-</script>
+    </script>
 
 </body>
-</html>
+                        </html>
