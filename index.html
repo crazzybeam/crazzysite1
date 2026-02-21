@@ -3,78 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crazzy Beamers | 7n</title>
+    <title>Crazzy Beamers | Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --primary-glow: #a855f7;
-            --bg-color: #050505;
-            --card-bg: rgba(20, 10, 30, 0.8);
-            --text-color: #ffffff;
-            --accent-red: #cc0000;
+            --secondary-glow: #6366f1;
+            --bg-color: #030005;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(168, 85, 247, 0.2);
+            --text-color: #f8fafc;
+            --accent-red: #ef4444;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; user-select: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-y: auto;
             min-height: 100vh;
-            background-image: radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%), linear-gradient(to bottom, #000 0%, #11051b 100%);
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(168, 85, 247, 0.3) 0%, transparent 70%),
+                radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
         }
 
-        #main-content { padding: 20px; max-width: 600px; margin: 0 auto; text-align: center; }
+        #main-content { padding: 40px 20px; max-width: 650px; margin: 0 auto; text-align: center; }
 
-        header { padding: 20px 0; border-bottom: 1px solid rgba(168, 85, 247, 0.2); margin-bottom: 20px; }
-        .hero-title { font-family: 'Courier Prime', monospace; font-size: 2rem; color: var(--primary-glow); }
+        header { padding-bottom: 30px; margin-bottom: 30px; }
+        .hero-title { 
+            font-family: 'Courier Prime', monospace; 
+            font-size: 2.5rem; 
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--primary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+        }
 
         .discord-main-btn {
-            display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px;
-            background: linear-gradient(90deg, #4c1d95, #7c3aed); color: white; text-decoration: none;
-            border-radius: 12px; font-weight: bold; margin-bottom: 25px; border: 1px solid var(--primary-glow);
-            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px;
+            background: linear-gradient(135deg, #6366f1, #a855f7); color: white; text-decoration: none;
+            border-radius: 16px; font-weight: 800; margin-bottom: 30px; 
+            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.1);
         }
+        .discord-main-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(168, 85, 247, 0.6); }
 
-        .page { display: none; flex-direction: column; gap: 15px; animation: slideIn 0.4s ease-out; padding-bottom: 50px; }
+        .page { display: none; flex-direction: column; gap: 18px; animation: fadeIn 0.5s ease; padding-bottom: 60px; }
         .page.active { display: flex; }
 
-        @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .card {
-            background: var(--card-bg); border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 12px; padding: 20px; cursor: pointer; text-align: left; transition: 0.3s;
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 20px; padding: 24px; cursor: pointer; text-align: left; 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .card:hover { border-color: var(--primary-glow); background: rgba(168, 85, 247, 0.15); }
+        .card:hover { 
+            border-color: var(--primary-glow); 
+            background: rgba(168, 85, 247, 0.08); 
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
+        }
+        .card h3 { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; margin-bottom: 6px; color: #fff; }
+        .card p { font-size: 0.9rem; color: #94a3b8; }
 
-        .header-panel { display: flex; align-items: center; gap: 15px; text-align: left; margin-bottom: 25px; }
+        .header-panel { display: flex; align-items: center; gap: 20px; text-align: left; margin-bottom: 30px; padding: 0 10px; }
         
-        /* ÍCONES PERSONALIZADOS */
         .icon-box-custom {
-            width: 54px; height: 54px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+            width: 60px; height: 60px; border-radius: 18px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
             color: white; border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .panel-card { background: #111; border-radius: 15px; overflow: hidden; text-align: left; margin-bottom: 20px; border: 1px solid #222; }
-        .panel-gif { width: 100%; height: 200px; object-fit: cover; display: block; }
-        .panel-info { padding: 20px; }
-        .panel-info h3 { font-size: 1.2rem; text-transform: uppercase; margin-bottom: 10px; font-family: 'Courier Prime', monospace; }
-        .panel-info p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+        .panel-card { 
+            background: rgba(10, 10, 15, 0.6); 
+            border-radius: 24px; overflow: hidden; text-align: left; 
+            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); 
+            backdrop-filter: blur(5px);
+        }
+        .panel-gif { width: 100%; height: 220px; object-fit: cover; display: block; opacity: 0.8; }
+        .panel-info { padding: 25px; }
+        .panel-info h3 { font-size: 1.3rem; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: #fff; }
+        .panel-info p { font-size: 0.95rem; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
         
         .btn-access {
             background: var(--accent-red); color: white; text-decoration: none;
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 12px; border-radius: 8px; font-weight: bold; transition: 0.3s;
+            padding: 14px; border-radius: 12px; font-weight: 700; transition: 0.3s;
         }
+        .btn-access:hover { filter: brightness(1.2); transform: translateY(-2px); }
 
-        .btn-back { align-self: flex-start; color: var(--primary-glow); padding: 10px 0; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-size: 0.8rem; }
+        .btn-back { 
+            align-self: flex-start; color: #94a3b8; padding: 10px; cursor: pointer; 
+            font-weight: 600; display: flex; align-items: center; gap: 8px; 
+            font-size: 0.85rem; transition: 0.3s;
+        }
+        .btn-back:hover { color: var(--primary-glow); }
 
-        .faq-box { background: rgba(20, 10, 30, 0.6); padding: 15px; border-radius: 8px; border-left: 3px solid var(--primary-glow); text-align: left; margin-bottom: 12px; }
-        .faq-box h4 { color: var(--primary-glow); margin-bottom: 8px; font-size: 0.95rem; }
-        .faq-box p { font-size: 0.85rem; color: #ccc; line-height: 1.5; }
+        .faq-box { 
+            background: rgba(255, 255, 255, 0.03); padding: 18px; border-radius: 15px; 
+            border-left: 4px solid var(--primary-glow); text-align: left; margin-bottom: 15px; 
+        }
+        .faq-box h4 { color: #fff; margin-bottom: 6px; font-size: 1rem; }
+        .faq-box p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -84,91 +123,87 @@
 
         <div id="menu-home" class="page active">
             <a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="discord-main-btn"><i class="fab fa-discord"></i> ENTRAR NO DISCORD</a>
-            <div class="card" onclick="showPage('page-painel')"><h3><i class="fas fa-terminal"></i> PAINEL</h3><p>Geradores de links e ferramentas</p></div>
-            <div class="card" onclick="showPage('page-bypass')"><h3><i class="fas fa-shield-virus"></i> BYPASS</h3><p>Evasão de segurança e proteção</p></div>
-            <div class="card" onclick="showPage('page-metodos')"><h3><i class="fas fa-book"></i> MÉTODOS</h3><p>Estratégias exclusivas</p></div>
-            <div class="card" onclick="showPage('page-tutorial')"><h3><i class="fas fa-graduation-cap"></i> TUTORIAL</h3><p>Aprenda a usar o sistema</p></div>
-            <div class="card" onclick="showPage('page-faq')"><h3><i class="fas fa-question-circle"></i> FAQ</h3><p>Perguntas frequentes e suporte</p></div>
+            <div class="card" onclick="showPage('page-painel')"><h3><i class="fas fa-terminal" style="color:#f59e0b"></i> PAINEL</h3><p>Geradores de links e ferramentas</p></div>
+            <div class="card" onclick="showPage('page-bypass')"><h3><i class="fas fa-shield-virus" style="color:#ef4444"></i> BYPASS</h3><p>Evasão de segurança e proteção</p></div>
+            <div class="card" onclick="showPage('page-metodos')"><h3><i class="fas fa-book" style="color:#a855f7"></i> MÉTODOS</h3><p>Estratégias exclusivas</p></div>
+            <div class="card" onclick="showPage('page-tutorial')"><h3><i class="fas fa-graduation-cap" style="color:#06b6d4"></i> TUTORIAL</h3><p>Aprenda a usar o sistema</p></div>
+            <div class="card" onclick="showPage('page-faq')"><h3><i class="fas fa-question-circle" style="color:#10b981"></i> FAQ</h3><p>Perguntas frequentes e suporte</p></div>
         </div>
 
         <div id="page-painel" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-chevron-left"></i> VOLTAR</div>
+            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
             <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);"><i class="fas fa-bolt"></i></div>
+                <div class="icon-box-custom" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fas fa-bolt"></i></div>
                 <div><h2>Painéis</h2><p>Geradores ativos</p></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
-                <div class="panel-info"><h3>Splunk X</h3><p>Melhor painel, diversos domínios, autosecure ótimo e sem bugs.</p><a href="https://abrir.link/BGhUJ" target="_blank" class="btn-access">ACESSAR</a></div>
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
+                <div class="panel-info"><h3>Splunk X</h3><p>Melhor painel, diversos domínios, autosecure ótimo e sem bugs.</p><a href="https://is.gd/7h8sXD" target="_blank" class="btn-access">ACESSAR</a></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
-                <div class="panel-info"><h3>Immortal X</h3><p>Painel pouco eficiente e com domínios personalizados.</p><a href="https://abrir.link/gXsJx" target="_blank" class="btn-access">ACESSAR</a></div>
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
+                <div class="panel-info"><h3>Immortal X</h3><p>Painel pouco eficiente e com domínios personalizados.</p><a href="https://is.gd/5YklU6" target="_blank" class="btn-access">ACESSAR</a></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
                 <div class="panel-info"><h3>Injures</h3><p>Painel secundário focado em performance e velocidade.</p><a href="https://abrir.link/ONbEU" target="_blank" class="btn-access">ACESSAR</a></div>
             </div>
         </div>
 
         <div id="page-bypass" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-chevron-left"></i> VOLTAR</div>
+            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
             <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #ef4444, #991b1b); box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);"><i class="fas fa-user-secret"></i></div>
+                <div class="icon-box-custom" style="background: linear-gradient(135deg, #ef4444, #991b1b);"><i class="fas fa-user-secret"></i></div>
                 <div><h2>Bypass</h2><p>Evasão de segurança</p></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
                 <div class="panel-info"><h3>Bypass On (Recomendada)</h3><p>Remoção forçada de e-mail verificado.</p><a href="https://rbxtools-kit.com/bypass/CrazzyBeamers" target="_blank" class="btn-access">ACESSAR</a></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
                 <div class="panel-info"><h3>Bypass Immortal</h3><p>Nova ferramenta de bypass de alto desempenho.</p><a href="https://abrir.link/xgfjy" target="_blank" class="btn-access">ACESSAR</a></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
                 <div class="panel-info"><h3>Bypass Secundário</h3><p>Link de emergência alternativo.</p><a href="https://abrir.link/HbHMO" target="_blank" class="btn-access">ACESSAR</a></div>
             </div>
         </div>
 
         <div id="page-metodos" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-chevron-left"></i> VOLTAR</div>
+            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
             <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #a855f7, #6b21a8); box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);"><i class="fas fa-crown"></i></div>
+                <div class="icon-box-custom" style="background: linear-gradient(135deg, #a855f7, #6b21a8);"><i class="fas fa-crown"></i></div>
                 <div><h2>Métodos</h2><p>Estratégias VIP</p></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
                 <div class="panel-info"><h3>Comunidade Discord</h3><p>Métodos avançados atualizados diariamente.</p><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access">VER NO DISCORD</a></div>
             </div>
         </div>
 
         <div id="page-tutorial" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-chevron-left"></i> VOLTAR</div>
+            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
             <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);"><i class="fas fa-play-circle"></i></div>
+                <div class="icon-box-custom" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><i class="fas fa-play-circle"></i></div>
                 <div><h2>Tutoriais</h2><p>Aprenda o sistema</p></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
-                <div class="panel-info"><h3>Método Link Fake</h3><p>Passo a passo da criação à captura.</p><a href="https://youtube.com/shorts/x-RnBGDiPRA" target="_blank" class="btn-access">ASSISTIR</a></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
-                <div class="panel-info"><h3>Método Cookie</h3><p>Como usar os dados capturados.</p><a href="https://youtube.com/shorts/C0ql9CegkJ4" target="_blank" class="btn-access">ASSISTIR</a></div>
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
+                <div class="panel-info"><h3>Tutorial No Discord</h3><p>Aprenda o passo a passo completo diretamente em nosso servidor oficial.</p><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access" style="background: #5865F2; color: white;">IR PARA DISCORD</a></div>
             </div>
         </div>
 
         <div id="page-faq" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-chevron-left"></i> VOLTAR</div>
+            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
             <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);"><i class="fas fa-comment-dots"></i></div>
+                <div class="icon-box-custom" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-comment-dots"></i></div>
                 <div><h2>FAQ</h2><p>Perguntas frequentes</p></div>
             </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1459936580566257666/1472467595050487880/cc13eb82b8e0432194bf3abd1000209c.gif?ex=6992adcf&is=69915c4f&hm=716644bbb299e03ac9c3bdf972762d405b15fc9c7cbaf257a1adc57ef4ce9627&" class="panel-gif">
+                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
                 <div class="panel-info">
-                    <div class="faq-box"><h4>01. Por onde eu começo?</h4><p>Assista aos tutoriais antes de avançar para a criação dos links.</p></div>
+                    <div class="faq-box"><h4>01. Por onde eu começo?</h4><p>Assista aos tutoriais no Discord antes de avançar.</p></div>
                     <div class="faq-box"><h4>02. Como eu consigo o cookie?</h4><p>O cookie é obtido quando o alvo loga e insere o código 2FA.</p></div>
                     <div class="faq-box"><h4>03. O que é Bypass?</h4><p>Ferramenta para forçar a remoção do e-mail verificado da conta.</p></div>
                     <div class="faq-box"><h4>04. O que é Auth?</h4><p>Ativa um autenticador e gera uma chave de acesso para você.</p></div>
@@ -187,8 +222,8 @@
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
-                </html>
+                                                                                                                </html>
