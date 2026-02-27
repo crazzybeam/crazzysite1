@@ -23,7 +23,6 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-y: auto;
             min-height: 100vh;
             background-image: 
                 radial-gradient(circle at 50% -20%, rgba(168, 85, 247, 0.3) 0%, transparent 70%),
@@ -31,92 +30,68 @@
             background-attachment: fixed;
         }
 
-        #main-content { padding: 40px 20px; max-width: 650px; margin: 0 auto; text-align: center; }
-
-        header { padding-bottom: 30px; margin-bottom: 30px; }
-        .hero-title { 
-            font-family: 'Courier Prime', monospace; 
-            font-size: 2.5rem; 
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #fff, var(--primary-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+        /* Tela de Boas-Vindas */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999; text-align: center; padding: 20px;
         }
+        .welcome-content h1 { font-family: 'Courier Prime', monospace; font-size: 3rem; margin-bottom: 20px; color: #fff; text-shadow: 0 0 20px var(--primary-glow); }
+        .welcome-content p { max-width: 500px; margin-bottom: 40px; color: #94a3b8; font-size: 1.1rem; }
+        .btn-start {
+            padding: 18px 60px; font-size: 1.2rem; font-weight: 800; color: white;
+            background: linear-gradient(135deg, #6366f1, #a855f7); border: none; border-radius: 50px; cursor: pointer;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); transition: 0.3s;
+        }
+
+        /* Conteúdo */
+        #main-content { padding: 40px 20px; max-width: 650px; margin: 0 auto; text-align: center; display: none; }
+        header { padding-bottom: 30px; margin-bottom: 30px; }
+        .hero-title { font-family: 'Courier Prime', monospace; font-size: 2.5rem; letter-spacing: 2px; background: linear-gradient(to right, #fff, var(--primary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .discord-main-btn {
             display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px;
             background: linear-gradient(135deg, #6366f1, #a855f7); color: white; text-decoration: none;
             border-radius: 16px; font-weight: 800; margin-bottom: 30px; 
-            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        .discord-main-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -5px rgba(168, 85, 247, 0.6); }
 
         .page { display: none; flex-direction: column; gap: 18px; animation: fadeIn 0.5s ease; padding-bottom: 60px; }
         .page.active { display: flex; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .card {
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(10px);
-            border-radius: 20px; padding: 24px; cursor: pointer; text-align: left; 
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; cursor: pointer; text-align: left; transition: 0.4s;
         }
-        .card:hover { 
-            border-color: var(--primary-glow); 
-            background: rgba(168, 85, 247, 0.08); 
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.1);
-        }
+        .card:hover { border-color: var(--primary-glow); background: rgba(168, 85, 247, 0.08); transform: scale(1.02); }
         .card h3 { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; margin-bottom: 6px; color: #fff; }
-        .card p { font-size: 0.9rem; color: #94a3b8; }
 
-        .header-panel { display: flex; align-items: center; gap: 20px; text-align: left; margin-bottom: 30px; padding: 0 10px; }
-        
-        .icon-box-custom {
-            width: 60px; height: 60px; border-radius: 18px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-            color: white; border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .panel-card { 
-            background: rgba(10, 10, 15, 0.6); 
-            border-radius: 24px; overflow: hidden; text-align: left; 
-            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); 
-            backdrop-filter: blur(5px);
-        }
-        .panel-gif { width: 100%; height: 220px; object-fit: cover; display: block; opacity: 0.8; }
+        .panel-card { background: rgba(10, 10, 15, 0.6); border-radius: 24px; overflow: hidden; text-align: left; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
+        .panel-gif { width: 100%; height: 220px; object-fit: cover; display: block; }
         .panel-info { padding: 25px; }
-        .panel-info h3 { font-size: 1.3rem; margin-bottom: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: #fff; }
-        .panel-info p { font-size: 0.95rem; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
         
         .btn-access {
-            background: var(--accent-red); color: white; text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 14px; border-radius: 12px; font-weight: 700; transition: 0.3s;
+            background: var(--accent-red); color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 14px; border-radius: 12px; font-weight: 700; transition: 0.3s; margin-top: 10px;
         }
-        .btn-access:hover { filter: brightness(1.2); transform: translateY(-2px); }
+        .btn-back { align-self: flex-start; color: #94a3b8; padding: 10px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
+        
+        .tutorial-text { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; border-left: 3px solid var(--primary-glow); }
 
-        .btn-back { 
-            align-self: flex-start; color: #94a3b8; padding: 10px; cursor: pointer; 
-            font-weight: 600; display: flex; align-items: center; gap: 8px; 
-            font-size: 0.85rem; transition: 0.3s;
-        }
-        .btn-back:hover { color: var(--primary-glow); }
-
-        .faq-box { 
-            background: rgba(255, 255, 255, 0.03); padding: 18px; border-radius: 15px; 
-            border-left: 4px solid var(--primary-glow); text-align: left; margin-bottom: 15px; 
-        }
+        .faq-box { background: rgba(255, 255, 255, 0.03); padding: 18px; border-radius: 15px; border-left: 4px solid var(--primary-glow); text-align: left; margin-bottom: 15px; }
         .faq-box h4 { color: #fff; margin-bottom: 6px; font-size: 1rem; }
-        .faq-box p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
+        .faq-box p { font-size: 0.9rem; color: #94a3b8; }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
+
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <h1>CRAZZY BEAMERS</h1>
+            <p>Bem-vindo ao portal oficial da Crazzy Beamers. Explore nossos painéis de última geração, métodos VIP e suporte completo para o seu sucesso.</p>
+            <button class="btn-start" onclick="startSite()">INICIAR</button>
+        </div>
+    </div>
 
     <div id="main-content">
         <header><div class="hero-title">CRAZZY BEAMERS</div></header>
@@ -132,76 +107,41 @@
 
         <div id="page-painel" class="page">
             <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="fas fa-bolt"></i></div>
-                <div><h2>Painéis</h2><p>Geradores ativos</p></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Splunk X</h3><p>Melhor painel, diversos domínios, autosecure ótimo e sem bugs.</p><a href="https://is.gd/7h8sXD" target="_blank" class="btn-access">ACESSAR</a></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Immortal X</h3><p>Painel pouco eficiente e com domínios personalizados.</p><a href="https://is.gd/5YklU6" target="_blank" class="btn-access">ACESSAR</a></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Injures</h3><p>Painel secundário focado em performance e velocidade.</p><a href="https://abrir.link/ONbEU" target="_blank" class="btn-access">ACESSAR</a></div>
-            </div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Splunk X</h3><p>Melhor painel, diversos domínios, autosecure ótimo e sem bugs.</p><a href="https://is.gd/7h8sXD" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Immortal X</h3><p>Painel pouco eficiente e com domínios personalizados.</p><a href="https://is.gd/5YklU6" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Injures</h3><p>Painel secundário focado em performance e velocidade.</p><a href="https://abrir.link/ONbEU" target="_blank" class="btn-access">ACESSAR</a></div></div>
         </div>
 
         <div id="page-bypass" class="page">
             <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #ef4444, #991b1b);"><i class="fas fa-user-secret"></i></div>
-                <div><h2>Bypass</h2><p>Evasão de segurança</p></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Bypass On (Recomendada)</h3><p>Remoção forçada de e-mail verificado.</p><a href="https://rbxtools-kit.com/bypass/CrazzyBeamers" target="_blank" class="btn-access">ACESSAR</a></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Bypass Immortal</h3><p>Nova ferramenta de bypass de alto desempenho.</p><a href="https://abrir.link/xgfjy" target="_blank" class="btn-access">ACESSAR</a></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Bypass Secundário</h3><p>Link de emergência alternativo.</p><a href="https://abrir.link/HbHMO" target="_blank" class="btn-access">ACESSAR</a></div>
-            </div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Bypass On (Recomendada)</h3><p>Remoção forçada de e-mail verificado.</p><a href="https://rbxtools-kit.com/bypass/CrazzyBeamers" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Bypass Immortal</h3><p>Nova ferramenta de bypass de alto desempenho.</p><a href="https://abrir.link/xgfjy" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Bypass Secundário</h3><p>Link de emergência alternativo.</p><a href="https://abrir.link/HbHMO" target="_blank" class="btn-access">ACESSAR</a></div></div>
         </div>
 
         <div id="page-metodos" class="page">
             <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #a855f7, #6b21a8);"><i class="fas fa-crown"></i></div>
-                <div><h2>Métodos</h2><p>Estratégias VIP</p></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Comunidade Discord</h3><p>Métodos avançados atualizados diariamente.</p><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access">VER NO DISCORD</a></div>
-            </div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Comunidade Discord</h3><p>Métodos avançados atualizados diariamente.</p><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access">VER NO DISCORD</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Dualhook</h3><a href="https://vt.tiktok.com/ZSmGHm1a3/" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Rover</h3><a href="https://vt.tiktok.com/ZSmaD6EyN/" target="_blank" class="btn-access" style="background:#5865F2">VÍDEO TUTORIAL</a><a href="https://is.gd/DzsgXJ" target="_blank" class="btn-access">LINK 1</a><a href="https://is.gd/LBrKQk" target="_blank" class="btn-access">LINK 2</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Converted</h3><a href="https://vt.tiktok.com/ZSmGHySKJ/" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Auth2</h3><a href="https://discord.com/channels/1459770394620989673/1470227076614324447" target="_blank" class="btn-access">ACESSAR</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Outros Métodos</h3><a href="https://vt.tiktok.com/ZSmG9RnQ4/" target="_blank" class="btn-access">Método Doação</a><a href="https://vt.tiktok.com/ZSmG918mk/" target="_blank" class="btn-access">Método Robux</a><a href="https://vt.tiktok.com/ZSmGH7dbP/" target="_blank" class="btn-access">Método Condo</a><a href="https://vt.tiktok.com/ZSmG989R3/" target="_blank" class="btn-access">Método Cod Promocional</a></div></div>
         </div>
 
         <div id="page-tutorial" class="page">
             <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #06b6d4, #0891b2);"><i class="fas fa-play-circle"></i></div>
-                <div><h2>Tutoriais</h2><p>Aprenda o sistema</p></div>
-            </div>
-            <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
-                <div class="panel-info"><h3>Tutorial No Discord</h3><p>Aprenda o passo a passo completo diretamente em nosso servidor oficial.</p><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access" style="background: #5865F2; color: white;">IR PARA DISCORD</a></div>
-            </div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial No Discord</h3><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access">IR PARA DISCORD</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Webook</h3><a href="https://vt.tiktok.com/ZSmGH8y7B/" target="_blank" class="btn-access">VER AGORA</a></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Bypass</h3><div class="tutorial-text">1. Cópia O Cookie.<br>2. Vai Em Bypass.<br>3. Entra Na Bypass Coloca O Cooke.<br>4. Espere, Se Der Sucess Deu Bom, Se Der Errado E F.<br>5. Só Dá Bypass Se Tiver Sem Idade Verificada, E Sem 2Fa.</div></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Web Site</h3><div class="tutorial-text">1. Entra Em Web Site.<br>2. Vai Em Gerador Clica Em "SLUNK".<br>3. Entra Coloca Sua Conta Do Discord.<br>4. Vai Pedir Para Colocar Webook Ai Você Coloca, Após Isso Seu Web Site Libera, Agora Só Fazer Algum Método.</div></div></div>
+            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Login Por Cookie</h3><a href="https://vt.tiktok.com/ZSmGH1aoY/" target="_blank" class="btn-access">VER AGORA</a></div></div>
         </div>
 
         <div id="page-faq" class="page">
             <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="header-panel">
-                <div class="icon-box-custom" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-comment-dots"></i></div>
-                <div><h2>FAQ</h2><p>Perguntas frequentes</p></div>
-            </div>
             <div class="panel-card">
-                <img src="https://cdn.discordapp.com/attachments/1469333337897304229/1472504710937448620/063e2799b5df4378a7d0c704bbc76af1.gif?ex=699a10a0&is=6998bf20&hm=ac13cb1ced33be9953c98e2f4ad6c3449f70857911e886c2620ad066a6fc2b1e&" class="panel-gif">
+                <img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif">
                 <div class="panel-info">
                     <div class="faq-box"><h4>01. Por onde eu começo?</h4><p>Assista aos tutoriais no Discord antes de avançar.</p></div>
                     <div class="faq-box"><h4>02. Como eu consigo o cookie?</h4><p>O cookie é obtido quando o alvo loga e insere o código 2FA.</p></div>
@@ -219,6 +159,10 @@
     </div>
 
     <script>
+        function startSite() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
@@ -226,4 +170,4 @@
         }
     </script>
 </body>
-                                                                                                                </html>
+                                                                                                                                                     </html>
